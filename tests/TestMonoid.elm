@@ -8,11 +8,15 @@ import Test
 
 suite : Test.Test
 suite =
-    Test.describe "The String module"
-        [ Test.fuzz Fuzz.string "restores the original string if you run it again" <|
-            \randomlyGeneratedString ->
-                randomlyGeneratedString
-                    |> String.reverse
-                    |> String.reverse
-                    |> Expect.equal randomlyGeneratedString
+    Test.describe "The Monoid module"
+        [ Test.fuzz (Fuzz.list Fuzz.string) "tests that ++ equivalent to Monoid.concat for string" <|
+            \randomlyGeneratedStringList ->
+                let
+                    expected : String
+                    expected =
+                        List.foldr (++) "" randomlyGeneratedStringList
+                in
+                randomlyGeneratedStringList
+                    |> Monoid.concat Monoid.string
+                    |> Expect.equal expected
         ]
