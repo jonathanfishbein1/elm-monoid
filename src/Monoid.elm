@@ -88,8 +88,8 @@ import Set exposing (Set)
 -}
 type Monoid a
     = Monoid
-        { empty : a
-        , append : a -> a -> a
+        { mempty : a
+        , mappend : a -> a -> a
         }
 
 
@@ -100,10 +100,10 @@ type Monoid a
 {-| Constructor for `Monoid`.
 -}
 monoid : a -> (a -> a -> a) -> Monoid a
-monoid empty append =
+monoid mempty mappend =
     Monoid
-        { empty = empty
-        , append = append
+        { mempty = mempty
+        , mappend = mappend
         }
 
 
@@ -114,15 +114,15 @@ monoid empty append =
 {-| Take the identity element of a monoid.
 -}
 empty : Monoid a -> a
-empty (Monoid { empty }) =
-    empty
+empty (Monoid { mempty }) =
+    mempty
 
 
 {-| Take the way to append a monoids.
 -}
 append : Monoid a -> (a -> a -> a)
-append (Monoid { append }) =
-    append
+append (Monoid { mappend }) =
+    mappend
 
 
 
