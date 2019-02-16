@@ -1,6 +1,6 @@
 {
     "type": "package",
-    "name": "jonathanfishbein/monoids",
+    "name": "jonathanfishbein1/elm-monoid",
     "summary": "A pack of monoids in the category of endofunctors",
     "license": "BSD-3-Clause",
     "version": "1.0.0",
