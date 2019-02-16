@@ -74,11 +74,11 @@ concat m = List.foldr (append m) (empty m)
 
 -}
 
-import Array exposing (Array)
-import Dict exposing (Dict)
-import Platform.Cmd as Cmd exposing (Cmd)
-import Platform.Sub as Sub exposing (Sub)
-import Set exposing (Set)
+import Array
+import Dict
+import Platform.Cmd
+import Platform.Sub
+import Set
 
 
 -- Types
@@ -182,21 +182,21 @@ list =
 
 {-| `Monoid` type for `Array`.
 -}
-array : Monoid (Array a)
+array : Monoid (Array.Array a)
 array =
     monoid Array.empty Array.append
 
 
 {-| `Monoid` type for `Dict`.
 -}
-dict : Monoid (Dict comparable a)
+dict : Monoid (Dict.Dict comparable a)
 dict =
     monoid Dict.empty Dict.union
 
 
 {-| `Monoid` type for `Set`.
 -}
-set : Monoid (Set comparable)
+set : Monoid (Set.Set comparable)
 set =
     monoid Set.empty Set.union
 
