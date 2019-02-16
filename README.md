@@ -2,7 +2,7 @@
 
 ## Summary
 
-A module to define generic functions for monoid.
+A module to define generic functions for monoid.  If you want your types be instances of the Monoid typeclass.  See [documentation](http://learnyouahaskell.com/functors-applicative-functors-and-monoids#monoids)
 
 ## Details
 
