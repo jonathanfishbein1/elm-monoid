@@ -22,7 +22,7 @@ suite =
             \randomlyGeneratedStringList ->
                 let
                     expected =
-                        List.foldr (++) "" randomlyGeneratedStringList
+                        List.foldr String.append "" randomlyGeneratedStringList
                 in
                 randomlyGeneratedStringList
                     |> Monoid.concat Monoid.string
