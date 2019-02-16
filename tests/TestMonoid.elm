@@ -1,15 +1,15 @@
 module TestMonoid exposing (suite)
 
-import Expect exposing (Expectation)
-import Fuzz exposing (Fuzzer, int, list, string)
+import Expect
+import Fuzz
 import Monoid
-import Test exposing (..)
+import Test
 
 
-suite : Test
+suite : Test.Test
 suite =
-    describe "The String module"
-        [ fuzz string "restores the original string if you run it again" <|
+    Test.describe "The String module"
+        [ Test.fuzz Fuzz.string "restores the original string if you run it again" <|
             \randomlyGeneratedString ->
                 randomlyGeneratedString
                     |> String.reverse
