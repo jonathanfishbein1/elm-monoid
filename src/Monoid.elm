@@ -1,30 +1,28 @@
-module Monoid
-    exposing
-        ( Monoid
-        , monoid
-        , empty
-        , append
-        , concat
-        , string
-        , Sum(..)
-        , sum
-        , Product(..)
-        , product
-        , list
-        , array
-        , dict
-        , set
-        , cmd
-        , sub
-        )
+module Monoid exposing
+    ( Monoid
+    , Sum(..)
+    , Product(..)
+    , monoid
+    , empty
+    , append
+    , concat
+    , string
+    , sum
+    , product
+    , list
+    , array
+    , dict
+    , set
+    , cmd
+    , sub
+    )
 
 {-| A module to define generic functions for monoid.
 For instance, we defined generic `concat` in this module using `Monoid` type as follows.
 
-```
-concat : Monoid a -> List a -> a
-concat m = List.foldr (append m) (empty m)
-```
+    concat : Monoid a -> List a -> a
+    concat m =
+        List.foldr (append m) (empty m)
 
     concat string ["foo", "bar", "baz"]
     --> "foobarbaz"
@@ -41,24 +39,29 @@ concat m = List.foldr (append m) (empty m)
     concat product <| List.map Product [1, 2, 3, 4] -- 1 * 2 * 3 * 4
     --> Product 24
 
+
 # Types
 
 @docs Monoid
 @docs Sum
 @docs Product
 
+
 # Constructors
 
 @docs monoid
+
 
 # Functions for unwraping Monoid
 
 @docs empty
 @docs append
 
+
 # Convenient functions for monoid
 
 @docs concat
+
 
 # Monoid types for popular types
 
@@ -79,6 +82,7 @@ import Dict
 import Platform.Cmd
 import Platform.Sub
 import Set
+
 
 
 -- Types
