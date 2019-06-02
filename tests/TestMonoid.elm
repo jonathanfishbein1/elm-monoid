@@ -9,42 +9,74 @@ import Test
 suite : Test.Test
 suite =
     Test.describe "The Monoid module"
-        [ Test.fuzz Fuzz.string "tests that ++ equivalent to Monoid.append for list" <|
-            \randomlyGeneratedString ->
+        [ Test.fuzz Fuzz.string "tests left identity value string" <|
+            \stringOne ->
                 let
-                    expected =
-                        String.append "" randomlyGeneratedString
+                    identityAppend =
+                        Monoid.append Monoid.string (Monoid.empty Monoid.string) stringOne
                 in
-                randomlyGeneratedString
-                    |> Monoid.append Monoid.string ""
-                    |> Expect.equal expected
-        , Test.fuzz (Fuzz.list Fuzz.string) "tests that ++ equivalent to Monoid.concat for string" <|
-            \randomlyGeneratedStringList ->
+                Expect.equal identityAppend stringOne
+        , Test.fuzz Fuzz.string "tests right identity value string" <|
+            \stringOne ->
                 let
-                    expected =
-                        List.foldr String.append "" randomlyGeneratedStringList
+                    identityAppend =
+                        Monoid.append Monoid.string stringOne (Monoid.empty Monoid.string)
                 in
-                randomlyGeneratedStringList
-                    |> Monoid.concat Monoid.string
-                    |> Expect.equal expected
-        , Test.fuzz (Fuzz.list Fuzz.int) "tests List.sum equivalent to Monoid.concat Monoid.sum " <|
-            \randomlyGeneratedIntList ->
+                Expect.equal identityAppend stringOne
+        , Test.fuzz Fuzz.int "tests left identity value sum" <|
+            \one ->
                 let
-                    expected =
-                        Monoid.Sum <| List.sum randomlyGeneratedIntList
+                    identityAppend =
+                        Monoid.append Monoid.sum (Monoid.empty Monoid.sum) (Monoid.Sum one)
                 in
-                randomlyGeneratedIntList
-                    |> List.map Monoid.Sum
-                    |> Monoid.concat Monoid.sum
-                    |> Expect.equal expected
-        , Test.fuzz (Fuzz.intRange -10 10) "tests List.product equivalent to Monoid.concat Monoid.product " <|
-            \randomlyGeneratedInt ->
+                Expect.equal identityAppend (Monoid.Sum one)
+        , Test.fuzz Fuzz.int "tests right identity value sum" <|
+            \one ->
                 let
-                    expected =
-                        Monoid.Product randomlyGeneratedInt
+                    identityAppend =
+                        Monoid.append Monoid.sum (Monoid.Sum one) (Monoid.empty Monoid.sum)
                 in
-                randomlyGeneratedInt
-                    |> Monoid.Product
-                    |> Monoid.append Monoid.product (Monoid.Product 1)
-                    |> Expect.equal expected
+                Expect.equal identityAppend (Monoid.Sum one)
+        , Test.fuzz Fuzz.int "tests left identity value product" <|
+            \one ->
+                let
+                    identityAppend =
+                        Monoid.append Monoid.product (Monoid.empty Monoid.product) (Monoid.Product one)
+                in
+                Expect.equal identityAppend (Monoid.Product one)
+        , Test.fuzz Fuzz.int "tests right identity value product" <|
+            \one ->
+                let
+                    identityAppend =
+                        Monoid.append Monoid.product (Monoid.Product one) (Monoid.empty Monoid.product)
+                in
+                Expect.equal identityAppend (Monoid.Product one)
+        , Test.fuzz (Fuzz.list Fuzz.int) "tests left identity value list" <|
+            \listOne ->
+                let
+                    identityAppend =
+                        Monoid.append Monoid.list (Monoid.empty Monoid.list) listOne
+                in
+                Expect.equal identityAppend listOne
+        , Test.fuzz (Fuzz.list Fuzz.int) "tests right identity value list" <|
+            \listOne ->
+                let
+                    identityAppend =
+                        Monoid.append Monoid.list listOne (Monoid.empty Monoid.list)
+                in
+                Expect.equal identityAppend listOne
+        , Test.fuzz (Fuzz.array Fuzz.int) "tests left identity value array" <|
+            \arrayOne ->
+                let
+                    identityAppend =
+                        Monoid.append Monoid.array (Monoid.empty Monoid.array) arrayOne
+                in
+                Expect.equal identityAppend arrayOne
+        , Test.fuzz (Fuzz.array Fuzz.int) "tests right identity value array" <|
+            \arrayOne ->
+                let
+                    identityAppend =
+                        Monoid.append Monoid.array arrayOne (Monoid.empty Monoid.array)
+                in
+                Expect.equal identityAppend arrayOne
         ]
