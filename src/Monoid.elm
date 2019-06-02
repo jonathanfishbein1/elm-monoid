@@ -79,8 +79,6 @@ For instance, we defined generic `concat` in this module using `Monoid` type as 
 
 import Array
 import Dict
-import Platform.Cmd
-import Platform.Sub
 import SemiGroup
 import Set
 
