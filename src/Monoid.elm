@@ -81,6 +81,7 @@ import Array
 import Dict
 import Platform.Cmd
 import Platform.Sub
+import SemiGroup
 import Set
 
 
@@ -93,7 +94,7 @@ import Set
 type Monoid a
     = Monoid
         { mempty : a
-        , mappend : a -> a -> a
+        , mappend : SemiGroup.SemiGroup a
         }
 
 
@@ -107,7 +108,7 @@ monoid : a -> (a -> a -> a) -> Monoid a
 monoid mempty mappend =
     Monoid
         { mempty = mempty
-        , mappend = mappend
+        , mappend = SemiGroup.SemiGroup mappend
         }
 
 
@@ -126,7 +127,11 @@ empty (Monoid { mempty }) =
 -}
 append : Monoid a -> (a -> a -> a)
 append (Monoid { mappend }) =
-    mappend
+    let
+        (SemiGroup.SemiGroup semigroupAppend) =
+            mappend
+    in
+    semigroupAppend
 
 
 
