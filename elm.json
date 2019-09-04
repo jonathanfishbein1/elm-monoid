@@ -3,7 +3,7 @@
     "name": "jonathanfishbein1/elm-monoid",
     "summary": "DEPRECATED A pack of monoids in the category of endofunctors",
     "license": "BSD-3-Clause",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "exposed-modules": [
         "Monoid"
     ],
