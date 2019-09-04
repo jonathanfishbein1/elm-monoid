@@ -2,6 +2,10 @@
 
 ## Summary
 
+
+UNMAINTAINED! Use https://package.elm-lang.org/packages/nikita-volkov/typeclasses/latest/
+
+
 A module to define generic functions for monoid.  If you want your types be instances of the Monoid typeclass.  Although I'm still learning, monoids are like interfaces for types that can be 'mushed' together in some way.
 
 For example lists and strings can be concated together and numbers can be added and multiplied together.
